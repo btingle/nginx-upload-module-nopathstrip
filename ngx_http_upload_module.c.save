@@ -1446,7 +1446,7 @@ static ngx_int_t ngx_http_upload_start_handler(ngx_http_upload_ctx_t *u) { /* {{
 
             if (file->fd == NGX_INVALID_FILE) {
                 err = ngx_errno;
-                ngx_log_error(NGX_LOG_ERR, r->connection->log, ngx_errno, "blah blah blah stuff and things %i %i", getuid(), getgid());
+                ngx_log_error(NGX_LOG_ERR, r->connection->log, ngx_errno, "blah blah blah stuff and things 1 %i %i", getuid(), getgid());
 
                 ngx_log_error(NGX_LOG_ERR, r->connection->log, ngx_errno,
                               "failed to create output file \"%V\" for \"%V\"", &file->name, &u->file_name);
@@ -1480,6 +1480,7 @@ static ngx_int_t ngx_http_upload_start_handler(ngx_http_upload_ctx_t *u) { /* {{
                     n = (uint32_t) ngx_next_temp_number(1);
                     continue;
                 }
+
                 ngx_log_error(NGX_LOG_ERR, r->connection->log, ngx_errno, "blah blah blah stuff and things 2 %i %i", getuid(), getgid());
                 ngx_log_error(NGX_LOG_ERR, r->connection->log, ngx_errno,
                               "failed to create output file \"%V\" for \"%V\"", &file->name, &u->file_name);
@@ -2108,7 +2109,6 @@ ngx_http_upload_merge_ranges(ngx_http_upload_ctx_t *u, ngx_http_upload_range_t *
     state_file->fd = ngx_open_file(state_file->name.data, NGX_FILE_RDWR, NGX_FILE_CREATE_OR_OPEN, ulcf->store_access);
 
     if (state_file->fd == NGX_INVALID_FILE) {
-        ngx_log_error(NGX_LOG_ERR, u->log, ngx_errno, "blah blah blah stuff and things 3 %i %i", getuid(), getgid());
         ngx_log_error(NGX_LOG_ERR, u->log, ngx_errno,
                       "failed to create or open state file \"%V\"", &state_file->name);
         return NGX_ERROR;
